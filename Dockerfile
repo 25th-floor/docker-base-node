@@ -1,6 +1,6 @@
-FROM node:5
+FROM node:6
 
-MAINTAINER 25th-floor GmbH "operations@25th-floor.com"
+MAINTAINER Mantigma GmbH "devops@mantigma.com"
 EXPOSE "8080"
 WORKDIR /app
 
