@@ -1,12 +1,16 @@
-FROM node:5
+FROM node:6
 
-MAINTAINER 25th-floor GmbH "operations@25th-floor.com"
+MAINTAINER Mantigma GmbH "devops@mantigma.com"
 EXPOSE "8080"
 WORKDIR /app
 
+# Install yarn
+curl -o- -L https://yarnpkg.com/install.sh | bash && \
+	ln -s /root/.yarn/bin/yarn /usr/local/bin/yarn
+
 # Ctrl-C support for container
 # F*** npm
-RUN npm install npm-start -g
+RUN yarn global add npm-start
 RUN sed -i 's/\(.\+\)\(trap on_proxy_exit \)SIGTERM/&\n\1\2SIGINT/' /usr/local/bin/npm-start
 
 # Install our entrypoint script
@@ -17,7 +21,7 @@ CMD ["run"]
 # Install production dependencies
 ONBUILD ENV NODE_ENV production
 ONBUILD ADD ./package.json /app/
-ONBUILD RUN npm install
+ONBUILD RUN yarn
 
 # Install application
 ONBUILD COPY . /app
