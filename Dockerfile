@@ -5,8 +5,7 @@ EXPOSE "8080"
 WORKDIR /app
 
 # Install yarn
-curl -o- -L https://yarnpkg.com/install.sh | bash && \
-	ln -s /root/.yarn/bin/yarn /usr/local/bin/yarn
+RUN npm install -g yarn
 
 # Ctrl-C support for container
 # F*** npm
