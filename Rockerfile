@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:{{ .NodeVersion }}
 
 MAINTAINER Mantigma GmbH "devops@mantigma.com"
 EXPOSE "8080"
@@ -25,4 +25,4 @@ ONBUILD RUN yarn
 # Install application
 ONBUILD COPY . /app
 
-PUSH mantigma/base-node:6
+PUSH mantigma/base-node:{{ .NodeVersion }}
